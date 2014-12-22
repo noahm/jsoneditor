@@ -191,6 +191,13 @@ define(['./util'], function (util) {
     // position the menu
     var left = util.getAbsoluteLeft(anchor);
     var top = util.getAbsoluteTop(anchor);
+
+    var bodyStyle = window.getComputedStyle(document.body, null);
+    if (bodyStyle.position == 'relative') {
+        left -= Number.parseInt(bodyStyle.marginLeft);
+        top -= Number.parseInt(bodyStyle.marginTop);
+    }
+
     if (top + anchorHeight + menuHeight < windowBottom) {
       // display the menu below the anchor
       this.dom.menu.style.left = left + 'px';

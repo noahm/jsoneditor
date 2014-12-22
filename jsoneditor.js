@@ -1559,9 +1559,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *                          in the browser page.
 	   */
 	  util.getAbsoluteLeft = function getAbsoluteLeft(elem) {
-	    var rect = elem.getBoundingClientRect(),
-	        bodyMarginLeft = Number.parseInt(window.getComputedStyle(document.body, null).marginLeft);
-	    return rect.left - bodyMarginLeft + window.pageXOffset || document.scrollLeft || 0;
+	    var rect = elem.getBoundingClientRect();
+	    return rect.left + window.pageXOffset || document.scrollLeft || 0;
 	  };
 
 	  /**
@@ -1571,9 +1570,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *                          in the browser page.
 	   */
 	  util.getAbsoluteTop = function getAbsoluteTop(elem) {
-	    var rect = elem.getBoundingClientRect(),
-	        bodyMarginTop = Number.parseInt(window.getComputedStyle(document.body, null).marginTop);
-	    return rect.top - bodyMarginTop + window.pageYOffset || document.scrollTop || 0;
+	    var rect = elem.getBoundingClientRect();
+	    return rect.top + window.pageYOffset || document.scrollTop || 0;
 	  };
 
 	  /**
@@ -5798,6 +5796,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // position the menu
 	    var left = util.getAbsoluteLeft(anchor);
 	    var top = util.getAbsoluteTop(anchor);
+
+	    var bodyStyle = window.getComputedStyle(document.body, null);
+	    if (bodyStyle.position == 'relative') {
+	        left -= Number.parseInt(bodyStyle.marginLeft);
+	        top -= Number.parseInt(bodyStyle.marginTop);
+	    }
+
 	    if (top + anchorHeight + menuHeight < windowBottom) {
 	      // display the menu below the anchor
 	      this.dom.menu.style.left = left + 'px';
