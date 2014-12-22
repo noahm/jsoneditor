@@ -317,12 +317,15 @@
   background-position: -24px 0;
 }
 
-.jsoneditor-contextmenu button.append > .icon {
+.jsoneditor-contextmenu button.append > .icon,
+.jsoneditor div.tree button.append {
   background-position: 0 -24px;
 }
 
 .jsoneditor-contextmenu button.append:hover > .icon,
-.jsoneditor-contextmenu button.append:focus > .icon {
+.jsoneditor-contextmenu button.append:focus > .icon,
+.jsoneditor div.tree button.append:hover,
+.jsoneditor div.tree button.append:focus {
   background-position: 0 0;
 }
 
