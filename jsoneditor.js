@@ -4225,6 +4225,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Node.prototype._createAppendButton = function() {
 	    var append = document.createElement('button'), node = this;
 	    append.className = 'append';
+	    append.title = 'Add a new item to this element'
 	    append.onclick = function() {
 	      var newNode = new Node(node.editor, {field: '', value: '', type: 'auto'});
 	      node.appendChild(newNode);
