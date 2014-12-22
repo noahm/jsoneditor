@@ -24,7 +24,7 @@
  *
  * @author  Jos de Jong, <wjosdejong@gmail.com>
  * @version 3.1.2
- * @date    2014-09-03
+ * @date    2014-12-22
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -2608,7 +2608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var node = this;
 	    var path = [];
 	    while (node) {
-	      var field = node.field || node.index;
+	      var field = node.field != undefined ? node.field : node.index;
 	      if (field !== undefined) {
 	        path.unshift(field);
 	      }
@@ -4219,6 +4219,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  /**
+	   * Create a button to add a child node to this node
+	   * @private
+	   */
+	  Node.prototype._createAppendButton = function() {
+	    var append = document.createElement('button'), node = this;
+	    append.className = 'append';
+	    append.onclick = function() {
+	      var newNode = new Node(node.editor, {field: '', value: '', type: 'auto'});
+	      node.appendChild(newNode);
+	    };
+	    return append;
+	  };
+
+	  /**
 	   * Create an expand/collapse button
 	   * @return {Element} expand
 	   * @private
@@ -4289,6 +4303,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    dom.value = this._createDomValue();
 	    tdValue.appendChild(dom.value);
 	    dom.tdValue = tdValue;
+
+	    // create a new child button
+	    if (this.type == 'object' || this.type == 'array') {
+	      var tdAppend = document.createElement('td');
+	      tdAppend.className = 'tree';
+	      tdAppend.appendChild(this._createAppendButton());
+	      tr.appendChild(tdAppend);
+	    }
 
 	    return domTree;
 	  };
