@@ -5537,14 +5537,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      },
 	      text: {
-	        'text': 'Text',
+	        'text': 'Raw Edit',
 	        'title': 'Switch to plain text editor',
 	        'click': function () {
 	          switchMode('text');
 	        }
 	      },
 	      tree: {
-	        'text': 'Tree',
+	        'text': 'Edit',
 	        'title': 'Switch to tree editor',
 	        'click': function () {
 	          switchMode('tree');
